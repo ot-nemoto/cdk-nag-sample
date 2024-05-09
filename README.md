@@ -4,7 +4,15 @@
 
 ## cdk-nag とは
 
-## 実行結果
+- AWS Cloud Development Kit (AWS CDK) アプリケーションに直接統合し、静的解析ツールと同様の検出およびレポートメカニズムを提供
+
+**参考資料**
+
+- [AWS Cloud Development Kit と cdk-nag でアプリケーションのセキュリティとコンプライアンスを管理する](https://aws.amazon.com/jp/blogs/news/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/)
+
+## AwsSolutions NagPack 適用
+
+**cdk synth**
 
 ```sh
 npx cdk synth
@@ -18,6 +26,8 @@ npx cdk synth
 
 _cdk.out/AwsSolutions-CdkNagSampleStack-NagReport.csv_
 
+ルールの準拠、非準拠、抑制の詳細
+
 ```csv
 Rule ID,Resource ID,Compliance,Exception Reason,Rule Level,Rule Info
 "AwsSolutions-S1","CdkNagSampleStack/Bucket/Resource","Non-Compliant","N/A","Error","The S3 Bucket has server access logs disabled."
@@ -26,6 +36,17 @@ Rule ID,Resource ID,Compliance,Exception Reason,Rule Level,Rule Info
 "AwsSolutions-S10","CdkNagSampleStack/Bucket/Resource","Non-Compliant","N/A","Error","The S3 Bucket or bucket policy does not require requests to use SSL."
 ```
 
-## 参考資料
+## テストコード実行
 
-- [AWS Cloud Development Kit と cdk-nag でアプリケーションのセキュリティとコンプライアンスを管理する](https://aws.amazon.com/jp/blogs/news/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/)
+```sh
+npm test
+  #  FAIL  test/cdk-nag-sample.test.ts (32.798 s)
+  #   cdk-nag AwsSolutions Pack
+  #     ✓ No unsuppressed Warnings (3607 ms)
+  #     ✕ No unsuppressed Errors (18 ms)
+  #
+  #   ● cdk-nag AwsSolutions Pack › No unsuppressed Errors
+  #
+  #     expect(received).toHaveLength(expected)
+  # ...
+```
